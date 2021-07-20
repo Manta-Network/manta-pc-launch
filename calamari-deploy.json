@@ -1,0 +1,138 @@
+{
+	"relaychain": {
+		"bin": "../polkadot/target/release/polkadot",
+		"chain": "rococo-local",
+		"nodes": [
+			{
+				"name": "alice",
+				"wsPort": 9944,
+				"port": 30444,
+				"flags": [
+					"--unsafe-ws-external",
+					"--unsafe-rpc-external",
+					"--rpc-cors=all"
+				]
+			},
+			{
+				"name": "bob",
+				"wsPort": 9955,
+				"port": 30555,
+				"flags": [
+					"--unsafe-ws-external",
+					"--unsafe-rpc-external",
+					"--rpc-cors=all"
+				]
+			},
+			{
+				"name": "charlie",
+				"wsPort": 9966,
+				"port": 30666,
+				"flags": [
+					"--unsafe-ws-external",
+					"--unsafe-rpc-external",
+					"--rpc-cors=all"
+				]
+			}
+		],
+		"genesis": {
+			"runtime": {
+				"runtime_genesis_config": {
+					"parachainsConfiguration": {
+						"config": {
+							"validation_upgrade_frequency": 1,
+							"validation_upgrade_delay": 1
+						}
+					}
+				}
+			}
+		}
+	},
+	"parachains": [
+		{
+			"bin": "../Manta/target/release/calamari-pc",
+			"id": "2084",
+			"chain": "calamari",
+			"nodes": [
+				{
+					"wsPort": 9981,
+					"port": 31201,
+					"flags": [
+						"--name=pc1",
+						"--rpc-port=9971",
+						"--base-path=./pc1",
+						"--rpc-methods=Unsafe",
+						"--unsafe-ws-external",
+						"--unsafe-rpc-external",
+						"--rpc-cors=all",
+						"--",
+						"--execution=wasm"
+					]
+				},
+				{
+					"wsPort": 9982,
+					"port": 31202,
+					"flags": [
+						"--name=pc2",
+						"--rpc-port=9972",
+						"--base-path=./pc2",
+						"--rpc-methods=Unsafe",
+						"--unsafe-ws-external",
+						"--unsafe-rpc-external",
+						"--rpc-cors=all",
+						"--",
+						"--execution=wasm"
+					]
+				},
+				{
+					"wsPort": 9983,
+					"port": 31203,
+					"flags": [
+						"--name=pc3",
+						"--rpc-port=9973",
+						"--base-path=./pc3",
+						"--rpc-methods=Unsafe",
+						"--unsafe-ws-external",
+						"--unsafe-rpc-external",
+						"--rpc-cors=all",
+						"--",
+						"--execution=wasm"
+					]
+				},
+				{
+					"wsPort": 9984,
+					"port": 31204,
+					"flags": [
+						"--name=pc4",
+						"--rpc-port=9974",
+						"--base-path=./pc4",
+						"--rpc-methods=Unsafe",
+						"--unsafe-ws-external",
+						"--unsafe-rpc-external",
+						"--rpc-cors=all",
+						"--",
+						"--execution=wasm"
+					]
+				},
+				{
+					"wsPort": 9985,
+					"port": 31205,
+					"flags": [
+						"--name=pc5",
+						"--rpc-port=9975",
+						"--base-path=./pc5",
+						"--rpc-methods=Unsafe",
+						"--unsafe-ws-external",
+						"--unsafe-rpc-external",
+						"--rpc-cors=all",
+						"--",
+						"--execution=wasm"
+					]
+				}
+
+			]
+		}
+	],
+	"hrmpChannels": [],
+	"types": {},
+	"finalization": false
+}
