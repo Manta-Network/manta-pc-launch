@@ -122,6 +122,7 @@ export async function addGenesisParachain(
 		paras.push(new_para);
 
 		let data = JSON.stringify(chainSpec, null, 2);
+
 		fs.writeFileSync(spec, data);
 		console.log(`  ✓ Added Genesis Parachain ${para_id}`);
 	} else {
@@ -174,29 +175,25 @@ export async function addGenesisHrmpChannel(
 	}
 }
 
-// Update the runtime config.
+// Update the runtime config in the genesis.
 // It will try to match keys which exist within the configuration and update the value.
-export async function mutateConfig(spec: string, updates: any, name: string, prop: any = undefined) {
+export async function changeGenesisConfig(spec: string, updates: any) {
 	let rawdata = fs.readFileSync(spec);
 	let chainSpec = JSON.parse(rawdata);
 
-  console.log(`\n⚙ Mutating ${name} Configuration`);
+	console.log(`\n⚙ Updating Relay Chain Genesis Configuration`);
 
-	if (prop && chainSpec[prop]) {
-		let config = chainSpec[prop];
-		findAndReplaceConfig(updates, config, 'Genesis');
-		let data = JSON.stringify(chainSpec, null, 2);
-		fs.writeFileSync(spec, data);
-	} else {
-		let config = chainSpec;
-		findAndReplaceConfig(updates, config, 'Chain');
+	if (chainSpec.genesis) {
+		let config = chainSpec.genesis;
+		findAndReplaceConfig(updates, config);
+
 		let data = JSON.stringify(chainSpec, null, 2);
 		fs.writeFileSync(spec, data);
 	}
 }
 
 // Look at the key + values from `obj1` and try to replace them in `obj2`.
-function findAndReplaceConfig(obj1: any, obj2: any, name: string) {
+function findAndReplaceConfig(obj1: any, obj2: any) {
 	// Look at keys of obj1
 	Object.keys(obj1).forEach((key) => {
 		// See if obj2 also has this key
@@ -207,15 +204,24 @@ function findAndReplaceConfig(obj1: any, obj2: any, name: string) {
 				obj1[key] !== undefined &&
 				obj1[key].constructor === Object
 			) {
-				findAndReplaceConfig(obj1[key], obj2[key], name);
+				findAndReplaceConfig(obj1[key], obj2[key]);
 			} else {
 				obj2[key] = obj1[key];
 				console.log(
-					`  ✓ Updated ${name} Configuration [ ${key}: ${obj2[key]} ]`
+					`  ✓ Updated Genesis Configuration [ ${key}: ${obj2[key]} ]`
 				);
 			}
 		} else {
-			console.error(`  ⚠ Bad ${name} Configuration [ ${key}: ${obj1[key]} ]`);
+			console.error(`  ⚠ Bad Genesis Configuration [ ${key}: ${obj1[key]} ]`);
 		}
 	});
+}
+
+export async function addBootNodes(spec: any, addresses: any) {
+	let rawdata = fs.readFileSync(spec);
+	let chainSpec = JSON.parse(rawdata);
+	chainSpec.bootNodes = addresses;
+	let data = JSON.stringify(chainSpec, null, 2);
+	fs.writeFileSync(spec, data);
+	console.log(`Added Boot Nodes: ${addresses}`);
 }
