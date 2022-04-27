@@ -32,16 +32,6 @@
 					"--execution=wasm",
 					"--wasm-execution=compiled"
 				]
-			},
-			{
-				"name": "dave",
-				"wsPort": 9977,
-				"port": 30777,
-				"flags": [
-					"--rpc-cors=all",
-					"--execution=wasm",
-					"--wasm-execution=compiled"
-				]
 			}
 		],
 		"genesis": {
@@ -49,7 +39,7 @@
 				"runtime_genesis_config": {
 					"configuration": {
 						"config": {
-							"validation_upgrade_frequency": 1,
+							"validation_upgrade_frequency": 10,
 							"validation_upgrade_delay": 10
 						}
 					}
@@ -60,84 +50,68 @@
 	"parachains": [
 		{
 			"bin": "../Manta/target/release/manta",
-			"id": "2084",
 			"chain": "dolphin-local",
 			"nodes": [
 				{
-					"wsPort": 9801,
-					"port": 31201,
+					"wsPort": 9800,
+					"port": 31200,
+					"rpcPort": 9970,
 					"name": "alice",
 					"flags": [
 						"--rpc-cors=all",
-						"--rpc-port=9971",
-						"--execution=wasm",
-						"--wasm-execution=compiled",
-						"--",
 						"--execution=wasm",
 						"--wasm-execution=compiled"
 					]
 				},
 				{
-					"wsPort": 9802,
-					"port": 31202,
+					"wsPort": 9806,
+					"port": 31206,
+					"rpcPort": 9976,
 					"name": "bob",
 					"flags": [
 						"--rpc-cors=all",
-						"--rpc-port=9972",
-						"--execution=wasm",
-						"--wasm-execution=compiled",
-						"--",
 						"--execution=wasm",
 						"--wasm-execution=compiled"
 					]
 				},
 				{
-					"wsPort": 9803,
-					"port": 31203,
+					"wsPort": 9807,
+					"port": 31207,
+					"rpcPort": 9977,
 					"name": "charlie",
 					"flags": [
 						"--rpc-cors=all",
-						"--rpc-port=9973",
-						"--execution=wasm",
-						"--wasm-execution=compiled",
-						"--",
 						"--execution=wasm",
 						"--wasm-execution=compiled"
 					]
 				},
 				{
-					"wsPort": 9804,
-					"port": 31204,
+					"wsPort": 9808,
+					"port": 31208,
+					"rpcPort": 9978,
 					"name": "dave",
 					"flags": [
 						"--rpc-cors=all",
-						"--rpc-port=9974",
-						"--execution=wasm",
-						"--wasm-execution=compiled",
-						"--",
 						"--execution=wasm",
 						"--wasm-execution=compiled"
 					]
 				},
 				{
-					"wsPort": 9805,
-					"port": 31205,
+					"wsPort": 9809,
+					"port": 31209,
+					"rpcPort": 9979,
 					"name": "eve",
 					"flags": [
 						"--rpc-cors=all",
-						"--rpc-port=9975",
-						"--execution=wasm",
-						"--wasm-execution=compiled",
-						"--",
 						"--execution=wasm",
 						"--wasm-execution=compiled"
 					]
 				}
 			]
-		}
+		}	
 	],
-	"hrmpChannels": [
-	],
+	"simpleParachains": [],
+	"hrmpChannels": [],
 	"types": {},
 	"finalization": false
 }
