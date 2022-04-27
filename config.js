@@ -32,7 +32,11 @@ var config = {
 				runtime_genesis_config: {
 					configuration: {
 						config: {
+<<<<<<< HEAD
 							validation_upgrade_frequency: 1,
+=======
+							validation_upgrade_frequency: 10,
+>>>>>>> 9b76e0574980d62380dcc0abec9280450adc8c3e
 							validation_upgrade_delay: 10,
 						},
 					},

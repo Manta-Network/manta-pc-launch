@@ -34,6 +34,8 @@ npm i polkadot-launch -g
 To use polkadot-launch, you need to have binary files for a `polkadot` relay chain and a
 `polkadot-collator` in the bin folder.
 
+> If you are on an Apple M1 ARM chip, make sure you are using the `stable-aarch64-apple-darwin` toolchain to compile the binaries.
+
 You can generate these files by cloning the `rococo-v1` branch of these projects in the same root as the polkadot-launch repo
 and building them with the specific flags below:
 
@@ -105,8 +107,8 @@ An example of `genesis` is:
     "runtime_genesis_config": {
       "configuration": {
         "config": {
-          "validation_upgrade_frequency": 1,
-          "validation_upgrade_delay": 1
+          "validation_upgrade_frequency": 10,
+          "validation_upgrade_delay": 10
         }
       },
       "palletCollective": {
